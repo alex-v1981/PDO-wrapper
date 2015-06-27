@@ -5,19 +5,24 @@ Usage examples
 
 ### Creating database instance
 Mysql
+
     $db = PDOWrapper::openMysql(YOUR_DB_HOST, YOUR_DB_NAME, YOUR_DB_USER, YOUR_DB_PASSWORD, EXIT_ON_ERROR_FLAG, CHARSET);
 
 Sqlite
+
     $db = PDOWrapper::openSqlite( DB_PATH );
 
 Custom
+
     $db = new PDOWrapper(DSN, YOUR_DB_USER, YOUR_DB_PASSWORD, EXIT_ON_ERROR_FLAG);
 
 ### Select
 Select first record
+
     $record = $db->selectOneRecord("SELECT * FROM table_name WHERE id=?", array(5));
 
 Select all records
+
     $records = $db->selectRecords("SELECT * FROM table_name WHERE id>? ORDER BY id", array(5));
 
 ### Insert 
@@ -45,10 +50,11 @@ Select all records
     $stmt = $db->query("SELECT id, field1, field2 FROM table_name WHERE id>? AND field=?", array(5, "value"));
 
 ### Transactions
-Transaction methods: beginTransaction(), endTransaction(), cancelTransaction()
+Transaction methods: <b>beginTransaction(), endTransaction(), cancelTransaction()</b>
 
 ### Errors
-If functions (selectOneRecord, selectRecords, insertRecord, updateRecord, updateRecordWithId, deleteRecord, deleteRecordWithId, getRowCount, query) returns false, it means that an error has occurred.
+If functions (<b>selectOneRecord, selectRecords, insertRecord, updateRecord, updateRecordWithId, deleteRecord, deleteRecordWithId, getRowCount, query</b>) returns false, it means that an error has occurred.
 You can get the error string:
+
     $errorString = $db->getLastError();
 
