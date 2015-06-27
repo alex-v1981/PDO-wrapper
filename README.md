@@ -49,7 +49,8 @@ Select all records
     $count = $db->getRowCount("table_name", "id>?", array(5));
 
 ### Custom query
-    $stmt = $db->query("SELECT id, field1, field2 FROM table_name WHERE id>? AND field=?", array(5, "value"));
+    $stmt = $db->query("UPDATE table_name SET field1=?, field2=? WHERE id>?", array("value1", "value2", 5));
+    $stmt = $db->query("DROP TABLE table_name");
 
 ### Transactions
 Transaction methods: <b>beginTransaction(), endTransaction(), cancelTransaction()</b>
