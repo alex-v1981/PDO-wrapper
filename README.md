@@ -6,11 +6,13 @@ Usage examples
 ### Creating database instance
 Mysql
 
+    $db = PDOWrapper::openMysql(YOUR_DB_HOST, YOUR_DB_NAME, YOUR_DB_USER, YOUR_DB_PASSWORD);
     $db = PDOWrapper::openMysql(YOUR_DB_HOST, YOUR_DB_NAME, YOUR_DB_USER, YOUR_DB_PASSWORD, EXIT_ON_ERROR_FLAG, CHARSET);
 
 Sqlite
 
     $db = PDOWrapper::openSqlite( DB_PATH );
+    $db = PDOWrapper::openSqlite(DB_PATH, EXIT_ON_ERROR_FLAG);
 
 Custom
 
