@@ -21,7 +21,7 @@ Custom
 ### Select
 Select first record
 
-    $record = $db->selectOneRecord("SELECT * FROM table_name WHERE id=?", array(5));
+    $record = $db->selectFirstRecord("SELECT * FROM table_name WHERE id=?", array(5));
 
 Select all records
 
@@ -56,7 +56,7 @@ Select all records
 Transaction methods: <b>beginTransaction(), endTransaction(), cancelTransaction()</b>
 
 ### Errors
-If functions (<b>selectOneRecord, selectRecords, insertRecord, updateRecord, updateRecordWithId, deleteRecord, deleteRecordWithId, getRowCount, query</b>) returns false, it means that an error has occurred.
+If functions (<b>selectFirstRecord, selectRecords, insertRecord, updateRecord, updateRecordWithId, deleteRecord, deleteRecordWithId, getRowCount, query</b>) returns false, it means that an error has occurred.
 You can get the error string:
 
     $errorString = $db->getLastError();
