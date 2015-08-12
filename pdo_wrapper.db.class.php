@@ -186,7 +186,7 @@ class PDOWrapper
         return $res;
     }
 
-    public function selectOneRecord($sql, $data=array())
+    public function selectFirstRecord($sql, $data=array())
     {
         $sth = $this->query($sql, $data);
 
@@ -207,9 +207,9 @@ class PDOWrapper
         return $res;
     }
 
-    public function selectOneRecordWithId($table, $id)
+    public function selectFirstRecordWithId($table, $id)
     {
-        return $this->selectOneRecord("SELECT * FROM $table WHERE `".$this->idFieldName."`=?", array($id));
+        return $this->selectFirstRecord("SELECT * FROM $table WHERE `".$this->idFieldName."`=?", array($id));
     }
 
     public function getRowCount($table, $where="", $data=array())
@@ -217,7 +217,7 @@ class PDOWrapper
         if ( $where )
             $where = "WHERE ".$where;
 
-        $res = $this->selectOneRecord("SELECT COUNT(*) AS num FROM $table $where", $data);
+        $res = $this->selectFirstRecord("SELECT COUNT(*) AS num FROM $table $where", $data);
 
         if ($res === false)
             return false;
