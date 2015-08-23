@@ -7,40 +7,57 @@ Usage examples
 Mysql
 
     $db = PDOWrapper::openMysql(YOUR_DB_HOST, YOUR_DB_NAME, YOUR_DB_USER, YOUR_DB_PASSWORD);
-    $db = PDOWrapper::openMysql(YOUR_DB_HOST, YOUR_DB_NAME, YOUR_DB_USER, YOUR_DB_PASSWORD, EXIT_ON_ERROR_FLAG, CHARSET);
+    $db = PDOWrapper::openMysql(YOUR_DB_HOST, YOUR_DB_NAME, YOUR_DB_USER, YOUR_DB_PASSWORD, CHARSET);
 
 Sqlite
 
     $db = PDOWrapper::openSqlite( DB_PATH );
-    $db = PDOWrapper::openSqlite(DB_PATH, EXIT_ON_ERROR_FLAG);
 
 Custom
 
-    $db = new PDOWrapper(DSN, YOUR_DB_USER, YOUR_DB_PASSWORD, EXIT_ON_ERROR_FLAG);
+    $db = new PDOWrapper(DSN, YOUR_DB_USER, YOUR_DB_PASSWORD);
 
 ### Select
 Select first record
 
-    $record = $db->selectFirstRecord("SELECT * FROM table_name WHERE id=?", array(5));
+    // SELECT * FROM table_name WHERE field1='value1'
+    $record = $db->selectFirstRecord("SELECT * FROM table_name WHERE field1=?", array("value1"));
+
+    // SELECT * FROM table_name WHERE id=5
+    $id = 5;
+    $record = $db->selectRecordWithId("table_name", $id);
 
 Select all records
 
+    // SELECT * FROM table_name WHERE id>5 ORDER BY id
     $records = $db->selectRecords("SELECT * FROM table_name WHERE id>? ORDER BY id", array(5));
 
-### Insert 
+### Insert
+
+    // INSERT INTO table_name (field1, field2) VALUES ('value1', 2)
     $lastInsertId = $db->insertRecord("table_name", array("field1"=>"value1", "field2"=>2));
 
 ### Update
+
+    // UPDATE table_name SET field1='value1', field2=2
     $result = $db->updateRecord("table_name", array("field1"=>"value1", "field2"=>2));
+
+    // UPDATE table_name SET field1='value1', field2=2 WHERE id>5
     $result = $db->updateRecord("table_name", array("field1"=>"value1", "field2"=>2), "id>?", array(5));
 
+    // // UPDATE table_name SET field1='value1', field2=2 WHERE id=5
     $id = 5;
     $result = $db->updateRecordWithId("table_name", array("field1"=>"value1", "field2"=>2), $id);
 
 ### Delete
+
+    // DELETE FROM table_name
     $result = $db->deleteRecord("table_name");
+
+    // DELETE FROM table_name WHERE id>5
     $result = $db->deleteRecord("table_name", "id>?", array(5));
 
+    // DELETE FROM table_name WHERE id=5
     $id = 5;
     $result = $db->deleteRecordWithId("table_name", $id);
 
@@ -49,7 +66,10 @@ Select all records
     $count = $db->getRowCount("table_name", "id>?", array(5));
 
 ### Custom query
+
+    // UPDATE table_name SET field1='value1', field2='value2' WHERE id>5
     $stmt = $db->query("UPDATE table_name SET field1=?, field2=? WHERE id>?", array("value1", "value2", 5));
+
     $stmt = $db->query("DROP TABLE table_name");
 
 ### Transactions
