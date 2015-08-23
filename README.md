@@ -76,7 +76,7 @@ Select all records
 Transaction methods: <b>beginTransaction(), endTransaction(), cancelTransaction()</b>
 
 ### Errors
-If functions (<b>selectFirstRecord, selectRecords, insertRecord, updateRecord, updateRecordWithId, deleteRecord, deleteRecordWithId, getRowCount, query</b>) returns false, it means that an error has occurred.
+If functions (<b>selectFirstRecord, selectRecordWithId, selectRecords, insertRecord, updateRecord, updateRecordWithId, deleteRecord, deleteRecordWithId, getRowCount, query</b>) returns false, it means that an error has occurred.
 You can get the error string:
 
     $errorString = $db->getLastError();
